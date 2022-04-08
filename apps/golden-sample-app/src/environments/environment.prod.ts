@@ -1,10 +1,44 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Provider } from '@angular/core';
 import { AuthConfig } from 'angular-oauth2-oidc';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Environment } from './type';
+
+const mockProviders: Provider[] = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useFactory: () => (<HttpInterceptor>{
+      intercept(
+        req: HttpRequest<{ method: string; url: string }>,
+        next: HttpHandler
+      ): Observable<HttpEvent<unknown>> {
+        if (
+          req.url.includes('api/')
+          // req.method === 'POST'
+        ) {
+          req = req.clone({
+            withCredentials: true
+          });
+        }
+
+        return next.handle(req);
+      }
+    }),
+    multi: true,
+  },
+];
 
 export const environment: Environment = {
   production: true,
   apiRoot: '${API_ROOT}',
   locales: '${LOCALES}'.split(','),
+  mockProviders,
   common: {
     designSlimMode: false,
   },
