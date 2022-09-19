@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingIndicatorModule } from '@backbase/ui-ang/loading-indicator';
+import { map } from 'rxjs/operators';
 import { MakeTransferJourneyConfiguration } from '../../services/make-transfer-journey-config.service';
 import { Transfer } from '../../model/Account';
-import { combineLatest, concat, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { MakeTransferPermissionsService } from '../../services/make-transfer-permissions.service';
 import {
   MakeTransferJourneyState,
   TransferLoadingStatus,
 } from '../../state/make-transfer-journey-state.service';
+import { MakeTransferTitleComponent } from '../../components/make-transfer-ui/make-transfer-title.component';
+import { MakeTransferFormComponent } from '../../components/make-transfer-form/make-transfer-form.component';
 
 @Component({
   templateUrl: 'make-transfer-view.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MakeTransferTitleComponent,
+    MakeTransferFormComponent,
+    LoadingIndicatorModule,
+  ]
 })
 export class MakeTransferViewComponent {
   title = this.route.snapshot.data['title'];

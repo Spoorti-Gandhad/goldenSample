@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { filter } from 'rxjs';
+import { MakeTransferSummaryComponent } from '../../components/make-transfer-summary/make-transfer-summary.component';
+import { MakeTransferTitleComponent } from '../../components/make-transfer-ui/make-transfer-title.component';
 import { MakeTransferCommunicationService } from '../../services/make-transfer-communication.service';
 import {
   MakeTransferJourneyState,
@@ -9,6 +12,12 @@ import {
 
 @Component({
   templateUrl: 'make-transfer-summary-view.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MakeTransferTitleComponent,
+    MakeTransferSummaryComponent,
+  ]
 })
 export class MakeTransferSummaryViewComponent implements OnDestroy {
   title = this.route.snapshot.data['title'];
@@ -47,7 +56,7 @@ export class MakeTransferSummaryViewComponent implements OnDestroy {
     private readonly router: Router,
     @Optional()
     private externalCommunicationService: MakeTransferCommunicationService
-  ) {}
+  ) { }
 
   ngOnDestroy(): void {
     this.successfulOperation.unsubscribe();

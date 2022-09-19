@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MakeTransferJourneyState } from './state/make-transfer-journey-state.service';
+
 @Component({
-  selector: 'bb-transfer-journey',
+  standalone: true,
   templateUrl: 'transfer-journey.component.html',
+  imports: [
+    RouterModule,
+  ],
   providers: [MakeTransferJourneyState],
 })
 export class TransferJourneyComponent {}

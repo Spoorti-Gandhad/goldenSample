@@ -1,16 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { ButtonModule } from '@backbase/ui-ang/button';
+import { CurrencyInputModule } from '@backbase/ui-ang/currency-input';
+import { InputValidationMessageModule } from '@backbase/ui-ang/input-validation-message';
 import { TRANSLATIONS } from '../../constants/dynamic-translations';
 import { Account, Transfer } from '../../model/Account';
 
 @Component({
   selector: 'bb-make-transfer-form',
   templateUrl: 'make-transfer-form.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    InputValidationMessageModule,
+    CurrencyInputModule,
+  ]
 })
 export class MakeTransferFormComponent implements OnInit {
   @Input() account: Account | undefined;

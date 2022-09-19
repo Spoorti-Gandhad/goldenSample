@@ -1,9 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ButtonModule } from '@backbase/ui-ang/button';
+import { MakeTransferTitleComponent } from '../../components/make-transfer-ui/make-transfer-title.component';
 import { MakeTransferJourneyState } from '../../state/make-transfer-journey-state.service';
 
 @Component({
   templateUrl: 'make-transfer-success-view.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    MakeTransferTitleComponent,
+  ]
 })
 export class MakeTransferSuccessViewComponent {
   transfer$ = this.transferStore.transfer$;
@@ -17,5 +26,5 @@ export class MakeTransferSuccessViewComponent {
     private readonly transferStore: MakeTransferJourneyState,
     private readonly route: ActivatedRoute,
     private readonly router: Router
-  ) {}
+  ) { }
 }
