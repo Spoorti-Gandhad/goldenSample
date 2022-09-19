@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { TRANSLATIONS } from '../../constants/dynamic-translations';
@@ -18,7 +18,7 @@ export class MakeTransferFormComponent implements OnInit {
   @Input() maxLimit = 0;
 
   @Output() submitTransfer = new EventEmitter<Transfer | undefined>();
-  makeTransferForm!: FormGroup;
+  makeTransferForm!: UntypedFormGroup;
 
   private getControl(field: string): AbstractControl | undefined {
     return this.makeTransferForm.controls[field];
@@ -65,7 +65,7 @@ export class MakeTransferFormComponent implements OnInit {
     return !!control && control.touched && control.invalid;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.makeTransferForm = this.fb.group({

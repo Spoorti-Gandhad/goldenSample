@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AchPositivePayHttpService } from '../../services/ach-positive-pay.http.service';
 import { NotificationService } from '@backbase/ui-ang/notification';
 import { ACH_POSITIVE_PAY_TRANSLATIONS } from '../../constants/dynamic-translations';
@@ -25,7 +25,7 @@ export class AchPositivePayNewRuleComponent implements OnInit {
 
   serverError: string | undefined;
 
-  achRuleForm!: FormGroup;
+  achRuleForm!: UntypedFormGroup;
 
   accounts$: Observable<ProductSummaryItem[]> =
     this.achPositivePayService.accounts$;
@@ -33,7 +33,7 @@ export class AchPositivePayNewRuleComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly achPositivePayService: AchPositivePayHttpService,
     private readonly notificationService: NotificationService
   ) {}

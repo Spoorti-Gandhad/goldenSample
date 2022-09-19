@@ -1,14 +1,15 @@
-module.exports = {
-  displayName: 'golden-sample-app',
+/* eslint-disable */
+export default {
+  displayName: 'transactions-journey',
   preset: '../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/apps/golden-sample-app',
+  coverageDirectory: '../../coverage/libs/transactions-journey',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

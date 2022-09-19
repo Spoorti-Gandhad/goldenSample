@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'transactions-journey',
+/* eslint-disable */
+export default {
+  displayName: 'transfer-journey',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/transactions-journey',
+  coverageDirectory: '../../coverage/libs/transfer-journey',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

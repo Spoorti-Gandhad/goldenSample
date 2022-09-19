@@ -2,6 +2,7 @@
   "version": 1,
   "projects": {
     "ach-positive-pay": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/ach-positive-pay",
       "sourceRoot": "libs/ach-positive-pay/src",
@@ -25,7 +26,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ach-positive-pay/jest.config.js",
+            "jestConfig": "libs/ach-positive-pay/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -41,6 +42,7 @@
       }
     },
     "golden-sample-app": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "application",
       "root": "apps/golden-sample-app",
       "sourceRoot": "apps/golden-sample-app/src",
@@ -134,13 +136,14 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/golden-sample-app/jest.config.js",
+            "jestConfig": "apps/golden-sample-app/jest.config.ts",
             "passWithNoTests": true
           }
         }
       }
     },
     "golden-sample-app-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/golden-sample-app-e2e",
       "sourceRoot": "apps/golden-sample-app-e2e/src",
       "projectType": "application",
@@ -154,6 +157,7 @@
       }
     },
     "transactions": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/transactions",
       "sourceRoot": "libs/transactions/src",
@@ -177,7 +181,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/transactions/jest.config.js",
+            "jestConfig": "libs/transactions/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -193,6 +197,7 @@
       }
     },
     "transfer": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/transfer",
       "sourceRoot": "libs/transfer/src",
@@ -216,7 +221,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/transfer/jest.config.js",
+            "jestConfig": "libs/transfer/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -230,20 +235,6 @@
           }
         }
       }
-    }
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
     }
   }
 }

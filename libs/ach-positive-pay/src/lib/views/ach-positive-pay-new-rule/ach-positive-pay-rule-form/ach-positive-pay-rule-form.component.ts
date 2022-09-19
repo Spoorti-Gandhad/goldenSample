@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ProductSummaryItem } from '@backbase/data-ang/arrangements';
 import { ACH_POSITIVE_PAY_TRANSLATIONS } from '../../../constants/dynamic-translations';
 
@@ -8,7 +8,7 @@ import { ACH_POSITIVE_PAY_TRANSLATIONS } from '../../../constants/dynamic-transl
   templateUrl: './ach-positive-pay-rule-form.component.html',
 })
 export class AchPositivePayRuleFormComponent {
-  @Input() form!: FormGroup;
+  @Input() form!: UntypedFormGroup;
 
   @Input() accounts: ProductSummaryItem[] = [];
 
