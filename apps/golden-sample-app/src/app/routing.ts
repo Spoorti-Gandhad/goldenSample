@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { EntitlementsGuard } from '@backbase/foundation-ang/entitlements';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { triplets } from './services/entitlementsTriplets';
 import { UserContextGuard } from './user-context/user-context.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -13,9 +12,9 @@ const routes: Routes = [
   },
   {
     path: 'select-context',
-    loadChildren: () =>
-      import('./user-context/user-context.module').then(
-        (m) => m.UserContextModule
+    loadComponent: () =>
+      import('./user-context/user-context.component').then(
+        (m) => m.UserContextComponent
       ),
     canActivate: [AuthGuard],
   },
@@ -62,9 +61,9 @@ const routes: Routes = [
   },
   {
     path: 'accounts',
-    loadChildren: () =>
-      import('./user-accounts/user-accounts.module').then(
-        (m) => m.UserAccountsModule
+    loadComponent: () =>
+      import('./user-accounts/user-accounts-view/user-accounts-view.component').then(
+        (m) => m.UserAccountsViewComponent
       ),
     canActivate: [AuthGuard, UserContextGuard],
   },
@@ -74,9 +73,3 @@ const routes: Routes = [
     redirectTo: 'transactions',
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

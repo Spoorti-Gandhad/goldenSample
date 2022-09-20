@@ -1,30 +1,34 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, InjectionToken, OnInit } from '@angular/core';
-import { LOCALES_LIST, LocalesService } from './locales.service';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { LocalesService } from './locales.service';
 import { localesCatalog } from './locales-catalog';
-
-export const documentWrapper = new InjectionToken<Document>(
-  'wrapper for document service'
-);
+import { FormsModule } from '@angular/forms';
+import { DropdownSingleSelectModule } from '@backbase/ui-ang/dropdown-single-select';
 
 @Component({
   selector: 'app-locale-selector',
   templateUrl: 'locale-selector.component.html',
-  providers: [
-    {
-      provide: documentWrapper,
-      useExisting: DOCUMENT,
-    },
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    DropdownSingleSelectModule,
   ],
+  providers: [
+    LocalesService,
+  ]
 })
 export class LocaleSelectorComponent implements OnInit {
+
+  @Input() locales: Array<string> = [];
+
   localesCatalog = localesCatalog;
+
   private currentLanguage = '';
 
   constructor(
     private localeService: LocalesService,
-    @Inject(LOCALES_LIST) public locales: Array<string>,
-    @Inject(documentWrapper) private document: Document
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   set language(value: string) {
