@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
+import { Route } from '@angular/router';
 import {
   MakeTransferCommunicationService,
   MakeTransferJourneyConfiguration,
-  TransferJourneyModule,
+  transferJourneyRoutes
 } from '@libs/transfer';
 import { environment } from '../../environments/environment';
 import { JourneyCommunicationService } from '../services/journey-communication.service';
 
-@NgModule({
-  imports: [TransferJourneyModule.forRoot()],
+export const routes: Array<Route> = transferJourneyRoutes.map(route => ({
+  ...route,
   providers: [
+    ...(route.providers || []),
     {
       provide: MakeTransferJourneyConfiguration,
       useValue: {
@@ -22,6 +23,5 @@ import { JourneyCommunicationService } from '../services/journey-communication.s
       provide: MakeTransferCommunicationService,
       useExisting: JourneyCommunicationService,
     },
-  ],
-})
-export class TransferJourneyBundleModule {}
+  ]
+}));

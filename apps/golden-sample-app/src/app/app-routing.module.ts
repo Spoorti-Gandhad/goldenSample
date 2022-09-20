@@ -22,8 +22,8 @@ const routes: Routes = [
   {
     path: 'transfer',
     loadChildren: () =>
-      import('./transfer/transfer-journey-bundle.module').then(
-        (m) => m.TransferJourneyBundleModule
+      import('./transfer/transfer-journey-bundle.routes').then(
+        (m) => m.routes
       ),
     canActivate: [AuthGuard, UserContextGuard],
   },

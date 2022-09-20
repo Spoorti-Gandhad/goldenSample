@@ -1,5 +1,4 @@
-export * from './lib/transfer-journey.component';
-export * from './lib/transfer-journey.module';
+export * from './lib/transfer-journey.routes';
 export * from './lib/components/make-transfer-form/make-transfer-form.component';
 export * from './lib/components/make-transfer-summary/make-transfer-summary.component';
 export * from './lib/views/make-transfer-view/make-transfer-view.component';

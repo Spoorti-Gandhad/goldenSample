@@ -1,5 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { provideRoutes, Route } from '@angular/router';
+import { Route } from '@angular/router';
 import { MakeTransferJourneyStoreGuard } from './make-transfer-journey-store-guard';
 import { TransferJourneyComponent } from './transfer-journey.component';
 import { MakeTransferSuccessViewComponent } from './views/make-transfer-success-view/make-transfer-success-view.component';
@@ -9,11 +8,20 @@ import { MakeTransferJourneyConfiguration } from './services/make-transfer-journ
 import { MakeTransferPermissionsService } from './services/make-transfer-permissions.service';
 import { MakeTransferAccountHttpService } from './services/make-transfer-accounts.http.service';
 import { MakeTransferRouteTitleResolverService } from './services/make-transfer-route-title-resolver.service';
+import { MakeTransferJourneyState } from './state/make-transfer-journey-state.service';
 import { TRANSLATIONS } from './constants/dynamic-translations';
 
-const defaultRoute: Route = {
+export const transferJourneyRoutes: Array<Route> = [{
   path: '',
   component: TransferJourneyComponent,
+  providers: [
+    MakeTransferJourneyState,
+    MakeTransferJourneyStoreGuard,
+    MakeTransferJourneyConfiguration,
+    MakeTransferPermissionsService,
+    MakeTransferAccountHttpService,
+    MakeTransferRouteTitleResolverService,
+  ],
   children: [
     {
       path: '',
@@ -53,27 +61,4 @@ const defaultRoute: Route = {
       canActivate: [MakeTransferJourneyStoreGuard],
     },
   ],
-};
-
-@NgModule({
-  imports: [TransferJourneyComponent],
-  providers: [
-    MakeTransferJourneyStoreGuard,
-    MakeTransferJourneyConfiguration,
-    MakeTransferPermissionsService,
-    MakeTransferAccountHttpService,
-    MakeTransferRouteTitleResolverService,
-  ],
-
-  exports: [TransferJourneyComponent],
-})
-export class TransferJourneyModule {
-  static forRoot(
-    data: { [key: string]: unknown; route: Route } = { route: defaultRoute }
-  ): ModuleWithProviders<TransferJourneyModule> {
-    return {
-      ngModule: TransferJourneyModule,
-      providers: [provideRoutes([data.route])],
-    };
-  }
-}
+}];
