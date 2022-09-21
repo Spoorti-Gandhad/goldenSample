@@ -136,7 +136,7 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
 ## Running with docker
 
-Run `ng build --configuration production` and then `docker-compose up` to startup the docker container with the application
+Run `ng build --configuration production` and then `docker-compose up --build` to startup the docker container with the application
 
 ## Package as a runnable Docker container
 

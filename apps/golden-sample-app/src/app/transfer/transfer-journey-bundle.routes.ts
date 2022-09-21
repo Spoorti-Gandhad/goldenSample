@@ -1,13 +1,13 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 import {
   MakeTransferCommunicationService,
   MakeTransferJourneyConfiguration,
-  transferJourneyRoutes
+  transferJourneyRoutes,
 } from '@libs/transfer';
 import { environment } from '../../environments/environment';
 import { JourneyCommunicationService } from '../services/journey-communication.service';
 
-export const routes: Array<Route> = transferJourneyRoutes.map(route => ({
+export const routes: Routes = transferJourneyRoutes.map(route => ({
   ...route,
   providers: [
     ...(route.providers || []),

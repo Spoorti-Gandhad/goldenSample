@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import {
   TransactionsJourneyConfiguration,
   TransactionsJourneyModule,
@@ -8,11 +7,10 @@ import {
 import { environment } from '../../environments/environment';
 import { JourneyCommunicationService } from '../services/journey-communication.service';
 import { TransactionItemAdditionalDetailsComponent } from './transaction-additional-details.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    CommonModule,
+    TransactionItemAdditionalDetailsComponent,
     TransactionsJourneyModule.forRoot({
       extensionSlots: {
         transactionItemAdditionalDetails:
@@ -20,7 +18,6 @@ import { CommonModule } from '@angular/common';
       },
     }),
   ],
-  declarations: [TransactionItemAdditionalDetailsComponent],
   providers: [
     {
       provide: TransactionsJourneyConfiguration,

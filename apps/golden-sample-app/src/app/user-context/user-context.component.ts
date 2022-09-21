@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectContextWidgetModule } from '@backbase/select-context-widget-ang';
@@ -10,7 +9,6 @@ import { UserContextGuard } from './user-context.guard';
   templateUrl: './user-context.component.html',
   standalone: true,
   imports: [
-    CommonModule,
     SelectContextWidgetModule,
   ],
 })

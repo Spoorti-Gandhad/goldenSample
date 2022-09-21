@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LayoutService } from '@backbase/ui-ang/layout';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { LogoModule } from '@backbase/ui-ang/logo';
 import { IconModule } from '@backbase/ui-ang/icon';
 import { RouterModule } from '@angular/router';
@@ -16,7 +16,9 @@ import { LocaleSelectorComponent } from './locale-selector/locale-selector.compo
   styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    NgClass,
+    NgIf,
+    AsyncPipe,
     RouterModule,
     LogoModule,
     IconModule,
