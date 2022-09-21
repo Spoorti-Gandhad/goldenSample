@@ -1,18 +1,20 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgFor } from '@angular/common';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { LocalesService } from './locales.service';
 import { localesCatalog } from './locales-catalog';
 import { FormsModule } from '@angular/forms';
-import { DropdownSingleSelectModule } from '@backbase/ui-ang/dropdown-single-select';
+import { DropdownMenuModule } from '@backbase/ui-ang/dropdown-menu';
+
+type Locale = typeof localesCatalog[string];
 
 @Component({
   selector: 'app-locale-selector',
   templateUrl: 'locale-selector.component.html',
   standalone: true,
   imports: [
-    CommonModule,
+    NgFor,
     FormsModule,
-    DropdownSingleSelectModule,
+    DropdownMenuModule,
   ],
   providers: [
     LocalesService,
@@ -22,17 +24,21 @@ export class LocaleSelectorComponent implements OnInit {
 
   @Input() locales: Array<string> = [];
 
-  localesCatalog = localesCatalog;
+  localesCatalog: Array<Locale> = [];
 
-  private currentLanguage = '';
+  protected currentLanguage = '';
 
   constructor(
     private localeService: LocalesService,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) { }
 
-  set language(value: string) {
-    this.localeService.setLocaleCookie(value);
+  set language(value: object | string) {
+    if (typeof value === 'string') {
+      return;
+    }
+
+    this.localeService.setLocaleCookie((value as Locale).code);
     this.document.location.href = this.document.location.origin;
   }
 
@@ -41,14 +47,13 @@ export class LocaleSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.localesCatalog = this.locales
+      .reduce((acc: Array<Locale>, locale) => [...acc, localesCatalog[locale]], []);
+
     this.currentLanguage = this.findLocale(this.localeService.currentLocale);
   }
 
   private findLocale(locale: string): string {
-    if (this.locales.includes(locale)) {
-      return locale;
-    }
-
-    return '';
+    return this.localesCatalog.find(x => x.code === locale)?.language ?? '';
   }
 }

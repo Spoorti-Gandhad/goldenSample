@@ -22,9 +22,10 @@ describe('bb-locale-selector', () => {
   function createComponent() {
     component = new LocaleSelectorComponent(
       mockLocalesService as LocalesService,
-      mockLocales,
       mockDocument as Document
     );
+
+    component.locales = mockLocales;
   }
 
   beforeEach(() => {
@@ -48,7 +49,7 @@ describe('bb-locale-selector', () => {
 
   it('should load all the languages configured', () => {
     const locales = mockLocales.map(
-      (locale) => component.localesCatalog[locale].language
+      (locale) => component.localesCatalog.find(x => x.code === locale)?.language
     );
     expect(locales).toEqual(['English', 'Spanish']);
   });
