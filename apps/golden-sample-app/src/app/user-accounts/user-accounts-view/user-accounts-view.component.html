@@ -1,19 +1,33 @@
 <div class="row">
   <div class="bb-card col-lg-6">
-    <div class="bb-card__body">
-      <div *ngIf="arrangements$ | async as arrangments">
-        <h1 i18n="user accounts header@@app.userAccountsView.header">
+    <ng-container *ngIf="arrangements$ | async as arrangments; else loading">
+      <div class="bb-card__header">
+        <h1 class="bb-card__title" i18n="user accounts header@@app.userAccountsView.header">
           There are {arrangments.length, plural, =0 {no accouints} =1 {account} other
           {{{ arrangments.length }} accounts}}
         </h1>
-
-        <ul>
-          <li *ngFor="let account of arrangments" data-role="arrangmenet-container">
-            {{ account.displayName }} - {{ account.availableBalance }}
-            {{ account.currency }}
-          </li>
-        </ul>
       </div>
-    </div>
+      <div class="bb-card__body">
+        <div class="bb-list">
+          <div *ngFor="let account of arrangments" data-role="product" class="bb-list__item">
+            <bb-product-item-basic-account-ui
+              [title]="account.displayName"
+              [amount]="account.availableBalance"
+              [currency]="account.currency"
+              [productNumber]="account.number"
+              balanceLabel="Available balance"
+              [active]=false
+              [favorite]="account.favorite || false"
+            ></bb-product-item-basic-account-ui>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loading>
+  <div data-role="transactions-view__loading-state-container">
+    <bb-loading-indicator-ui loaderSize="lg"></bb-loading-indicator-ui>
+  </div>
+</ng-template>

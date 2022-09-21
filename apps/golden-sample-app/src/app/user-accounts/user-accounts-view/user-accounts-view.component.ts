@@ -1,5 +1,7 @@
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { LoadingIndicatorModule } from '@backbase/ui-ang/loading-indicator';
+import { ProductItemBasicAccountModule } from '@backbase/ui-ang/product-item-basic-account';
 import { UserAccountsService } from '../user-accounts.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { UserAccountsService } from '../user-accounts.service';
     AsyncPipe,
     NgIf,
     NgForOf,
+    ProductItemBasicAccountModule,
+    LoadingIndicatorModule,
   ],
   providers: [
     UserAccountsService,
