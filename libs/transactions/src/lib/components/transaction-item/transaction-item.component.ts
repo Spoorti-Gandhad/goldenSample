@@ -1,3 +1,4 @@
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,6 +10,7 @@ import {
   Type,
 } from '@angular/core';
 import { TransactionItem } from '@backbase/data-ang/transactions';
+import { AmountModule } from '@backbase/ui-ang/amount';
 import { ViewExtensionDirective } from '@backbase/ui-ang/view-extensions';
 import {
   TRANSACTION_EXTENSIONS_CONFIG,
@@ -17,11 +19,26 @@ import {
   TransactionAdditionalDetailsContext,
 } from '../../extensions';
 
+@Directive({
+  selector: '[bbTransactionsItemAdditions]',
+  standalone: true,
+})
+export class TransactionItemAdditionalDetailsDirective
+  extends ViewExtensionDirective<TransactionAdditionalDetailsContext> { }
+
 @Component({
   selector: 'bb-transaction-item',
   templateUrl: './transaction-item.component.html',
   styleUrls: ['./transaction-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    DatePipe,
+    NgIf,
+    NgClass,
+    AmountModule,
+    TransactionItemAdditionalDetailsDirective,
+  ]
 })
 export class TransactionItemComponent implements OnChanges {
   @Input()
@@ -58,8 +75,3 @@ export class TransactionItemComponent implements OnChanges {
     }
   }
 }
-
-@Directive({
-  selector: '[bbTransactionsItemAdditions]',
-})
-export class TransactionItemAdditionalDetailsDirective extends ViewExtensionDirective<TransactionAdditionalDetailsContext> {}
