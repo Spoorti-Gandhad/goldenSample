@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingIndicatorModule } from '@backbase/ui-ang/loading-indicator';
 import { map } from 'rxjs/operators';
@@ -17,29 +17,31 @@ import { MakeTransferFormComponent } from '../../components/make-transfer-form/m
   templateUrl: 'make-transfer-view.component.html',
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
+    AsyncPipe,
     MakeTransferTitleComponent,
     MakeTransferFormComponent,
     LoadingIndicatorModule,
   ]
 })
 export class MakeTransferViewComponent {
-  title = this.route.snapshot.data['title'];
   vm$ = this.transferStore.vm$;
   limit$ = this.permissions.unlimitedAmountPerTransaction$.pipe(
     map((resolve) => (!resolve ? this.config.maxTransactionAmount : 0))
   );
 
   submitTransfer(transfer: Transfer | undefined): void {
-    if (transfer !== undefined) {
-      this.transferStore.next(transfer);
-      this.router.navigate(['../make-transfer-summary'], {
-        relativeTo: this.route,
-        state: {
-          transfer,
-        },
-      });
+    if (transfer === undefined) {
+      return;
     }
+
+    this.transferStore.next(transfer);
+    this.router.navigate(['../summary'], {
+      relativeTo: this.route,
+      state: {
+        transfer,
+      },
+    });
   }
 
   isLoading(status: TransferLoadingStatus) {
@@ -51,7 +53,7 @@ export class MakeTransferViewComponent {
     private readonly router: Router,
     private readonly transferStore: MakeTransferJourneyState,
     private readonly permissions: MakeTransferPermissionsService,
-    public readonly config: MakeTransferJourneyConfiguration
+    protected readonly config: MakeTransferJourneyConfiguration,
   ) {
     transferStore.loadAccounts();
   }

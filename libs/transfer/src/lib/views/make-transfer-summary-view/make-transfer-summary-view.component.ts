@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -14,13 +14,13 @@ import {
   templateUrl: 'make-transfer-summary-view.component.html',
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
+    AsyncPipe,
     MakeTransferTitleComponent,
     MakeTransferSummaryComponent,
   ]
 })
 export class MakeTransferSummaryViewComponent implements OnDestroy {
-  title = this.route.snapshot.data['title'];
   vm$ = this.transferStore.vm$;
   private successfulOperation = this.transferStore.vm$
     .pipe(
@@ -33,7 +33,7 @@ export class MakeTransferSummaryViewComponent implements OnDestroy {
       if (this.externalCommunicationService && transfer) {
         this.externalCommunicationService.makeTransfer(transfer);
       } else {
-        this.router.navigate(['../make-transfer-success'], {
+        this.router.navigate(['../success'], {
           relativeTo: this.route,
           state: {
             transfer: transfer,
@@ -47,7 +47,7 @@ export class MakeTransferSummaryViewComponent implements OnDestroy {
   }
 
   close(): void {
-    this.router.navigate(['../make-transfer'], { relativeTo: this.route });
+    this.router.navigate(['../make'], { relativeTo: this.route });
   }
 
   constructor(

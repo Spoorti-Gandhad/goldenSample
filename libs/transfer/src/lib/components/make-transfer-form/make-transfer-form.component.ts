@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   AbstractControl,
@@ -18,7 +18,7 @@ import { Account, Transfer } from '../../model/Account';
   templateUrl: 'make-transfer-form.component.html',
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
     ButtonModule,
     ReactiveFormsModule,
     InputValidationMessageModule,

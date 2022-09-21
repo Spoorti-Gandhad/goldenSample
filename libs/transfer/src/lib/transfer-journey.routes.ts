@@ -1,4 +1,4 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 import { MakeTransferJourneyStoreGuard } from './make-transfer-journey-store-guard';
 import { TransferJourneyComponent } from './transfer-journey.component';
 import { MakeTransferSuccessViewComponent } from './views/make-transfer-success-view/make-transfer-success-view.component';
@@ -11,7 +11,7 @@ import { MakeTransferRouteTitleResolverService } from './services/make-transfer-
 import { MakeTransferJourneyState } from './state/make-transfer-journey-state.service';
 import { TRANSLATIONS } from './constants/dynamic-translations';
 
-export const transferJourneyRoutes: Array<Route> = [{
+export const transferJourneyRoutes: Routes = [{
   path: '',
   component: TransferJourneyComponent,
   providers: [
@@ -25,11 +25,11 @@ export const transferJourneyRoutes: Array<Route> = [{
   children: [
     {
       path: '',
-      redirectTo: 'make-transfer',
+      redirectTo: 'make',
       pathMatch: 'full',
     },
     {
-      path: 'make-transfer',
+      path: 'make',
       component: MakeTransferViewComponent,
       data: {
         title: TRANSLATIONS.makeTransferTitle,
@@ -39,7 +39,7 @@ export const transferJourneyRoutes: Array<Route> = [{
       },
     },
     {
-      path: 'make-transfer-summary',
+      path: 'summary',
       component: MakeTransferSummaryViewComponent,
       data: {
         title: TRANSLATIONS.makeTransferTitle,
@@ -50,7 +50,7 @@ export const transferJourneyRoutes: Array<Route> = [{
       canActivate: [MakeTransferJourneyStoreGuard],
     },
     {
-      path: 'make-transfer-success',
+      path: 'success',
       component: MakeTransferSuccessViewComponent,
       data: {
         title: TRANSLATIONS.makeTransferTitle,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { MakeTransferJourneyState } from './state/make-transfer-journey-state.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -8,6 +7,9 @@ import { MakeTransferJourneyState } from './state/make-transfer-journey-state.se
   imports: [
     RouterModule,
   ],
-  providers: [MakeTransferJourneyState],
 })
-export class TransferJourneyComponent {}
+export class TransferJourneyComponent {
+  protected title = this.route.snapshot.firstChild?.data['title'];
+
+  constructor(private route: ActivatedRoute) { }
+}
