@@ -10,6 +10,7 @@ import {
   EntitlementsModule,
   ENTITLEMENTS_CONFIG,
 } from '@backbase/foundation-ang/entitlements';
+import { TrackerModule } from '@backbase/foundation-ang/observability';
 import { AuthService, IdentityAuthModule } from '@backbase/identity-auth';
 import { AvatarModule } from '@backbase/ui-ang/avatar';
 import { ButtonModule } from '@backbase/ui-ang/button';
@@ -35,6 +36,7 @@ import { AppErrorHandler } from './app.error-handler';
 import { AuthEventsHandlerService } from './auth/auth-events-handler.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { LocaleSelectorModule } from './locale-selector/locale-selector.module';
+import { ConsoleTrackerHandler } from './services/console-tracker-handler';
 
 @NgModule({
   declarations: [AppComponent],
@@ -58,6 +60,9 @@ import { LocaleSelectorModule } from './locale-selector/locale-selector.module';
     }),
     ButtonModule,
     IdentityAuthModule,
+    TrackerModule.forRoot({
+      handler: ConsoleTrackerHandler
+    })
   ],
   providers: [
     ...(environment.mockProviders || []),
