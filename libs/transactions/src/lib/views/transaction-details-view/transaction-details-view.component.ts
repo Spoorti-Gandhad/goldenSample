@@ -2,7 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Optional } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Currency, TransactionItem } from '@backbase/data-ang/transactions';
-import { ScreenViewTrackerEvent, ScreenViewTrackerEventPayload, Tracker } from '@backbase/foundation-ang/observability';
+import {
+  ScreenViewTrackerEvent,
+  ScreenViewTrackerEventPayload,
+  Tracker
+} from '@backbase/foundation-ang/observability';
 import { combineLatest, map } from 'rxjs';
 import { TransactionsHttpService } from '../../services/transactions.http.service';
 
